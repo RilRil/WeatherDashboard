@@ -1,4 +1,4 @@
-TiltWebsite
+Weather Dashboard
 ===========
 
-Backend server for displaying tilt photos on the web.
+A small Weather webb app made for a job application
