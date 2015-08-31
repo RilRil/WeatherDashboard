@@ -67,13 +67,7 @@ server.post('/',routes.index);
 
 server.get('/', routes.index);
 server.get('/about/us', routes.aboutus);
-server.get('/about/terms', routes.aboutterms);
-server.get('/about/privacy', routes.aboutprivacy);
-server.get('/about/licenses', routes.aboutlicenses);
-//server.get('/aaremove', routes.remove);
 server.get('/p/:postId', routes.post);
-server.get('/p/:postId/embed', routes.embedpost);
-server.get('/p/:postId/embed/simple', routes.postsimple);
 
 server.get('/getthetreasures', routes.getthetreasures);
 
