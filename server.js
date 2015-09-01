@@ -3,7 +3,6 @@
 
 var connect = require('connect'),
     express = require('express'),
-    io = require('socket.io'),
     port = (process.env.PORT || 8081),
     routes = require('./routes');
 
@@ -43,25 +42,10 @@ server.error(function(err, req, res, next){
 
 server.listen( port);
 
-//Setup Socket.IO
-var io = io.listen(server);
-io.sockets.on('connection', function(socket){
-  console.log('Client Connected');
-  socket.on('message', function(data){
-    socket.broadcast.emit('server_message',data);
-    socket.emit('server_message',data);
-  });
-  socket.on('disconnect', function(){
-    console.log('Client Disconnected.');
-  });
-});
-
 
 ///////////////////////////////////////////
 //              Routes                   //
 ///////////////////////////////////////////
-
-/////// ADD ALL YOUR ROUTES HERE  /////////
 
 server.post('/',routes.index);
 
@@ -69,10 +53,8 @@ server.get('/', routes.index);
 server.get('/about/us', routes.aboutus);
 server.get('/p/:postId', routes.post);
 
-server.get('/getthetreasures', routes.getthetreasures);
 
-
-//A Route for Creating a 500 Error (Useful to keep around)
+//A Route for Creating a 500 Error
 server.get('/500', function(req, res){
     throw new Error('This is a 500 Error');
 });
@@ -81,7 +63,7 @@ server.get('/504', function(req, res){
     throw new Error('This is a 504 Error');
 });
 
-//The 404 Route (ALWAYS Keep this as the last route)
+//The 404 Route
 server.get('/*', function(req, res){
     throw new NotFound;
 });
