@@ -9,7 +9,6 @@ var connect = require('connect'),
 //Setup Express
 var server = express.createServer();
 server.configure(function(){
-    server.set('websiteUrl', 'http://tilt.photos/');
     server.set('views', __dirname + '/views');
     server.set('view options', { layout: false });
     server.use(connect.bodyParser());
@@ -20,23 +19,36 @@ server.configure(function(){
     server.use(server.router);
 });
 
+// Setup LocalStorage
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
+} else {
+  throw new Error('This is a 500 Error');
+}
+
 //setup the errors
 server.error(function(err, req, res, next){
     if (err instanceof NotFound) {
-        res.render('404.jade', { locals: { 
-                  title : '404 - Not Found'
-                 ,description: ''
-                 ,author: ''
-                 ,analyticssiteid: 'XXXXXXX' 
-                },status: 404 });
+        res.render('404.jade', { 
+          locals: { 
+            title : '404 - Not Found',
+            description: '',
+            author: ''
+          },
+          status: 404 }
+        );
+
     } else {
-        res.render('500.jade', { locals: { 
-                  title : 'The Server Encountered an Error'
-                 ,description: ''
-                 ,author: ''
-                 ,analyticssiteid: 'XXXXXXX'
-                 ,error: err 
-                },status: 500 });
+        res.render('500.jade', { 
+          locals: { 
+            title : 'The Server Encountered an Error',
+            description: '',
+            author: '',
+            error: err 
+          },
+          status: 500 }
+        );
     }
 });
 
@@ -50,8 +62,10 @@ server.listen( port);
 server.post('/',routes.index);
 
 server.get('/', routes.index);
-server.get('/about/us', routes.aboutus);
-server.get('/p/:postId', routes.post);
+server.get('/settings', routes.settings);
+server.get('/deleteall', routes.deleteall);
+server.get('/add/:cityId', routes.add);
+server.get('/delete/:cityId', routes.delete);
 
 
 //A Route for Creating a 500 Error

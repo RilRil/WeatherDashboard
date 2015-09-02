@@ -8,28 +8,30 @@
 //[if gt IE 8]><!
 html.no-js(lang='en')
   //<![end if]
-  head
+  head(prefix="og: http://ogp.me/ns#")
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
-    title=title
-    meta(name="description", content=description)
-    meta(name="author", content=author)
+    title="Weather Dashboard"
+    meta(name="description", content="Weather Dashboard.")
+    meta(name="author", content="cyril MAUREL")
     meta(name="viewport", content='width=device-width, initial-scale=1, maximum-scale=1')
-    meta(name="google-site-verification", content="PV8MW_lzCy5MVMvLKYOWZlyvXJAKL-TnkAc8aPbK2Ig")
-    link(rel='stylesheet', href='/css/skeleton/base.css')
-    link(rel='stylesheet', href='/css/skeleton/skeleton.css')
-    link(rel='stylesheet', href='/css/skeleton/layout.css')
+    link(rel='stylesheet', href='/css/style.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.5/css/weather-icons.min.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
 
   body
-    block header
+    #global
+      header
+        a(href="/") <i class="fa fa-home"></i> Home
+        = " - "
+        a(href="/settings") <i class="fa fa-wrench"></i> Settings
 
-    block content
+      block content
 
-    block footer
-      footer
-        script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
-        script(defer, src='/js/google-analytics.js')
-        //if lt IE 7
-          script(defer, src='//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js')
-          script(defer)
-            window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})
+      block footer
+          script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+          script
+            window.jQuery || document.write('<script src="js/jquery.js"><\\/script>')
+          script(defer, src='/js/main.js')
+          script(defer, src='/js/plugins.js')         
+          script(defer, src='/js/jquery.browser.mobile.js')

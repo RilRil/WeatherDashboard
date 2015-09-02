@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h1 Settings
+
+  if typeof code !== 'undefined' && code == 404
+    p.error 
+    ='Something went wrong.'
+
+  h2 Search and add a widget
+  // Search
+  #search
+    input(type="text", size=30, id="input-search", placeholder="Montpellier")
+    span(id="button-search")!= '<i class="fa fa-search"></i>Search'
+    div#results
+
+  h2 Manage your widgets
+  // Display the Widgets already saved by the user
+  if typeof cities !== 'undefined' && cities.length > 0
+    ul#widgetlisthome
+      - for (i=0; i < cities.length; i++)
+        li(class='widget')!= cities[i].name + ' <span class="deletewidget"><i class="fa fa-times"></i><a href="/delete/'+i+'">delete</a></span>'
+    // option to delete all the widgets saved by the user
+    span(id="deleteall")!= '<a href="/deleteall"><i class="fa fa-exclamation-triangle"></i>Delete All Widgets</a>'        
+  else
+    p(style="text-align:center;") You don't have any widget yet.
+
