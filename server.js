@@ -14,7 +14,6 @@ server.configure(function(){
     server.use(connect.bodyParser());
     server.use(express.cookieParser());
     server.use(express.session({ secret: "shhhhhhhhh!"}));
-    server.use('/cdn', express.static(__dirname + '/cdn'));
     server.use(express.static(__dirname + '/static'));
     server.use(server.router);
 });
@@ -63,9 +62,6 @@ server.post('/',routes.index);
 
 server.get('/', routes.index);
 server.get('/settings', routes.settings);
-server.get('/deleteall', routes.deleteall);
-server.get('/add/:cityId', routes.add);
-server.get('/delete/:cityId', routes.delete);
 
 
 //A Route for Creating a 500 Error
