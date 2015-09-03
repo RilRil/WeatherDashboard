@@ -125,13 +125,17 @@ header {
     cursor: pointer;
 }
 
+/* ********** MEDIA QUERIES *********** */
 
 /* small devices */
 @media (max-width: 768px) {
+  .cmwi {
+    right: 20px !important;
+  }
+
   #search input[type=text] {
     width: 220px;
   }
-  
 }
 
 /* Medium devices (desktops, 992px and up) */
