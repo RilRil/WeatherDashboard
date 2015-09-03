@@ -25,7 +25,7 @@ $( document ).ready(function() {
     console.log($(this.id));
     $.ajax({
       dataType: "json",
-      url: 'https://pro.openweathermap.org/data/2.5/weather?units=metric&id='+this.id,
+      url: 'http://api.openweathermap.org/data/2.5/weather?units=metric&id='+this.id,
       success: function(data){
         if (data.cod != 404) {
           $(element).append('<span class="temp">'+data.main.temp+' ˚C</span><i class="cmwi wi '+weatherIcons[data.weather[0].icon]+'">');
