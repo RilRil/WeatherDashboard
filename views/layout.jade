@@ -15,12 +15,13 @@ html.no-js(lang='en')
     meta(name="description", content="Weather Dashboard.")
     meta(name="author", content="cyril MAUREL")
     meta(name="viewport", content='width=device-width, initial-scale=1, maximum-scale=1')
+    link(rel='stylesheet', href='/css/bootstrap-responsive.css')
     link(rel='stylesheet', href='/css/style.css')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.5/css/weather-icons.min.css')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
 
   body
-    #global
+    #global.container
       header
         a(href="/") <i class="fa fa-home"></i> Home
         = " - "
@@ -29,6 +30,7 @@ html.no-js(lang='en')
       block content
 
       block footer
+        footer
           script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
           script
             window.jQuery || document.write('<script src="js/jquery.js"><\\/script>')

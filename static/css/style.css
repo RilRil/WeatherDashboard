@@ -33,7 +33,6 @@ button:focus {
 }
 
 #global {
-  width: 640px;
   margin: 0 auto;
 }
 
@@ -46,7 +45,6 @@ header {
   margin: 0;
 }
 #widgetlisthome li {
-  width:400px;
   background-color: #F5F5F5;
   margin: 10px auto;
   padding: 10px;
@@ -66,7 +64,7 @@ header {
 }
 
 .cmwi {
-  font-size: 73px;
+  font-size: 65px;
   position: absolute;
   top: 7px;
   right: 50px;
@@ -110,9 +108,29 @@ header {
     color: red;
 }
 
-span#deleteall {
+#deleteall {
     text-align: center;
     width: 150px;
     margin: 25px auto;
     display: block;
 }
+
+
+/* small devices */
+@media (max-width: 768px) {
+  #search input[type=text] {
+    width: 220px;
+  }
+  
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 768px) {
+  #widgetlisthome li {
+    width:400px;
+  }
+
+}
+
+
+

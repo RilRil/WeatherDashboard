@@ -4,7 +4,7 @@
 var connect = require('connect'),
     express = require('express'),
     port = (process.env.PORT || 8081),
-    routes = require('./routes');
+    routes = require('./routes/routes.js');
 
 //Setup Express
 var server = express.createServer();

@@ -6,6 +6,3 @@ block content
   ul#widgetlisthome
     - for (i=0; i < cities.length; i++)
       li(id=cities[i].id, class='widget')!= "<span class='cityname'>"+cities[i].name+"<span class='citycountry'>["+cities[i].sys.country+"]</span></span>"
-
-append footer
-  script(defer, src='/js/getWeather.js')

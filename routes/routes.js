@@ -1,40 +1,34 @@
 // ALL ROUTES HERE
 
-
-
 // Index route
+// Just rendering the index page HTML here, we'll get the weather infos via AJAX
 exports.index = function(req, res){
-		
 	var cities  = (JSON.parse(localStorage.getItem("cities")) !== null ? JSON.parse(localStorage.getItem("cities")) : []);
 
-		if (cities.length > 0) {
-			res.render('index.jade', {
-				locals : {
-					cities : cities
-				}
-			});
-		} else {
-			// No cities saved
-			res.render('nocities.jade');
-		}
+  //  if we've got widgets in the LocalStorage
+  if (cities.length > 0) {
+    res.render('index.jade', {locals : { cities : cities } });
+  } else {
+		// No widgets saved yet
+		res.render('nocities.jade');
+  }
 };
 
 
-
+// Settings Route
+// just rendering the settings page HTML
 exports.settings = function(req, res){
-
 	var cities  = (JSON.parse(localStorage.getItem("cities")) !== null ? JSON.parse(localStorage.getItem("cities")) : []);
-
 	res.render('settings.jade', {
 		locals : {
 			cities : cities
 		}}
 	);
-
 };
 
 
 // Add a widget 
+// use city's unique ID , make an API call to get its infos and store them with LocalStorage (JSON files)
 exports.add = function(req, res) {
 	var id      = req.params.cityId;
 	var code    = 200;
@@ -42,14 +36,14 @@ exports.add = function(req, res) {
 	var cities  = (JSON.parse(localStorage.getItem("cities")) !== null ? JSON.parse(localStorage.getItem("cities")) : []);
 	var request = require('request');
 
+
+  // API call to OpenWeatherMap using city's unique ID
 	request('http://api.openweathermap.org/data/2.5/weather?units=metric&id='+id, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
-
 			if (body.cod != 404) {
 				cities.push(JSON.parse(body));
 				localStorage.setItem("cities", JSON.stringify(cities));
 				cities = (JSON.parse(localStorage.getItem("cities")) !== null ? JSON.parse(localStorage.getItem("cities")) : []);
-
 			} else {
 				code = 404;
 				msg  = body.message;	
@@ -58,6 +52,7 @@ exports.add = function(req, res) {
 			code = 404;
 			msg  = "An error occurred.";
 		}
+    // once the API call is done we render the HTML
 		res.render('settings.jade', {
 			locals: {
 				code : code,
@@ -72,15 +67,16 @@ exports.add = function(req, res) {
 
 
 // Delete a widget
+// remove city infos from LocalStorage
 exports.delete = function(req, res) {
 	var id      = req.params.cityId;
 	var cities  = (JSON.parse(localStorage.getItem("cities")) !== null ? JSON.parse(localStorage.getItem("cities")) : []);
 
-	console.log(cities);
 	cities.splice(id, 1);
 	localStorage.setItem("cities", JSON.stringify(cities));
 	cities = (JSON.parse(localStorage.getItem("cities")) !== null ? JSON.parse(localStorage.getItem("cities")) : []);
 
+  // render HTML
 	res.render('settings.jade', {
 		locals: {
 			cities : cities
@@ -95,9 +91,10 @@ exports.deleteall = function(req, res) {
 	localStorage.removeItem("cities");
 	var cities  = (JSON.parse(localStorage.getItem("cities")) !== null ? JSON.parse(localStorage.getItem("cities")) : []);
 
+  // render HTML
 	res.render('settings.jade', {
 		locals : {
 			cities : cities
 		}}
-		);
+	);
 };
