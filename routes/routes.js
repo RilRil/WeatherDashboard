@@ -3,27 +3,13 @@
 // Index route
 // Just rendering the index page HTML here, we'll get the weather infos via AJAX
 exports.index = function(req, res){
-	var cities  = (JSON.parse(localStorage.getItem("cities")) !== null ? JSON.parse(localStorage.getItem("cities")) : []);
-
-  //  if we've got widgets in the LocalStorage
-  if (cities.length > 0) {
-    res.render('index.jade', {locals : { cities : cities } });
-  } else {
-		// No widgets saved yet
-		res.render('nocities.jade');
-  }
+    res.render('index.jade');
 };
-
 
 // Settings Route
 // just rendering the settings page HTML
 exports.settings = function(req, res){
-	var cities  = (JSON.parse(localStorage.getItem("cities")) !== null ? JSON.parse(localStorage.getItem("cities")) : []);
-	res.render('settings.jade', {
-		locals : {
-			cities : cities
-		}}
-	);
+	res.render('settings.jade');
 };
 
 

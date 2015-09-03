@@ -31,6 +31,13 @@ button:focus {
 .fa {
   margin: 0 2px;
 }
+.nowidget {
+  background-color: white !important;
+  text-align: center;
+}
+.nowidget a {
+  text-decoration: underline;
+}
 
 #global {
   margin: 0 auto;
@@ -99,6 +106,7 @@ header {
 .addwidget {
     margin: 0 13px;
     color: green;
+    cursor: pointer;
 }
 
 .deletewidget {
@@ -106,6 +114,7 @@ header {
     position: absolute;
     right: 20px;
     color: red;
+    cursor: pointer;
 }
 
 #deleteall {
@@ -113,6 +122,7 @@ header {
     width: 150px;
     margin: 25px auto;
     display: block;
+    cursor: pointer;
 }
 
 
